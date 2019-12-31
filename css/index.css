@@ -1,0 +1,145 @@
+#__next{
+  height: 100%;
+  position: relative;
+}
+/* header */
+.header{
+  background: #fff;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.04);
+}
+.header .logo{
+  width: 120px;
+  color: #1890ff;
+  font-size: 24px;
+  text-align: center;
+}
+.header .search{
+  flex: 1;
+  padding-right: 50%;
+}
+
+/* main */
+.main{
+  position: absolute;
+  top: 74px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+}
+
+/* gold-side */
+.gold-content, .github-content{
+  flex: 1;
+  overflow: hidden;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 15px;
+}
+.gold-content .sub-header,.github-content .sub-header{
+  padding: 0 5px;
+  flex: none;
+  height: 40px;
+  background: #fff;
+  margin-bottom: 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  border-radius: 2px;
+}
+.gold-content .sub-logo-text, .github-content .sub-logo-text{
+  font-size: 18px;
+  color: #1890ff;
+  padding: 0 10px;
+}
+.gold-content .ant-select,.github-content .ant-select{
+  width: 120px;
+}
+.gold-content .ant-list,.github-content .ant-list{
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 5px;
+}
+
+.gold-content .gold-item{
+  display: flex;
+  background: #fff;
+  padding: 5px;
+  color: #333;
+  flex: 1;
+}
+.gold-content .gold-item-extra{
+  padding: 0 8px;
+  background-color: #007fff;
+  color: #e8f1ff;
+  border-radius: 2px;
+  margin-right: 10px;;
+  text-align: center;
+}
+
+.gold-content .ant-list-item{
+  padding: 0;
+  margin-bottom: 15px;
+  font-size: 16px;;
+}
+
+.gold-content .gold-item-main{
+  flex: 1;
+  width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.gold-content .gold-item-title{
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+.gold-content .gold-item-foot{
+  color: #999;
+  font-size: 12px;
+}
+
+
+/* github-content */
+.github-content{
+  flex: 2.5;
+}
+.github-content .sub-header{
+margin-right: 20px;
+padding-right: 10px;
+}
+.github-content .sub-logo-text{
+  color: #333;
+  flex: 1;
+}
+.github-content .source-icon{
+  height: 34px;
+}
+.github-content .ant-list-grid .ant-col > .ant-list-item{
+  margin-bottom: 10px;
+}
+
+.github-content .git-card{
+ background-color: #fff;
+ border-radius: 2px;
+ padding: 20px;
+ height: 180px;
+ display: flex;
+ flex-direction: column;
+}
+.github-content .git-card-row:last-child{
+  margin: 0;
+}
+.github-content .git-card-desc{
+  flex: 1;
+}
