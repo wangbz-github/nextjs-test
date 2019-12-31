@@ -1,24 +1,34 @@
+import 'moment/locale/zh-cn';
 import { Select, Layout, List, Icon } from 'antd';
 import moment from 'moment';
-import 'moment/locale/zh-cn';
+import { getGoldList, changeType } from '../store/gold';
+import { useSelector, useDispatch } from 'react-redux';
 const { Option } = Select;
 const { Content } = Layout;
 
-function GoldContent(props) {
+function GoldContent() {
+  const { list, type, category } = useSelector(state => state.gold);
+  const dispatch = useDispatch();
+
+  const handleChangeType = (type) => {
+    dispatch(changeType(type));
+    dispatch(getGoldList);
+  }
+
   return (
     <Content className="gold-content">
       <div className="sub-header">
         <span className="sub-logo-icon"></span>
         <span className="sub-logo-text">掘金</span>
-        <Select defaultValue="all" width={120} onChange={() => { }}>
-          <Option value="all">首页</Option>
-          <Option value="frontend">前端</Option>
-          <Option value="backend">后端</Option>
+        <Select defaultValue={type} width={120} onChange={handleChangeType}>
+          {category && category.map(item => (
+            <Option value={item.value} key={item.value}>{item.text}</Option>
+          ))}
         </Select>
       </div>
       <List
         itemLayout="horizontal"
-        dataSource={props.list}
+        dataSource={list}
         renderItem={item => (
           <List.Item>
             <a className="gold-item" href={item.url}>

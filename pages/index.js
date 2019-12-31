@@ -1,14 +1,18 @@
 import 'antd/dist/antd.css';
 import '../css/index.css';
+
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Layout, Input } from 'antd';
 import GoldContent from '../components/GoldContent';
 import GithubContent from '../components/GithubContent';
-import axios from 'axios';
+import { getGoldList } from '../store/gold';
+import { getGitList } from '../store/github';
 
 const { Header } = Layout;
 const { Search } = Input;
 
-function Index(props) {
+function Index() {
   return (
     <Layout>
       <Header className="header">
@@ -16,33 +20,19 @@ function Index(props) {
         <Search className="search" placeholder="开课搜索，如：java，阿里巴巴，前端面试" onSearch={value => console.log(value)} enterButton />
       </Header>
       <Layout className="main">
-        <GoldContent list={props.listGold} />
-        <GithubContent list={props.listGit} />
+        <GoldContent />
+        <GithubContent />
       </Layout>
     </Layout>
   );
 }
 
-Index.getInitialProps = async ctx => {
-  const resGold = await axios.post(`https://extension-ms.juejin.im/resources/gold`, {
-    category: "backend",
-    order: "heat",
-    offset: 0,
-    limit: 30,
-  });
 
-  const resGit = await axios.post(`https://extension-ms.juejin.im/resources/github`, {
-    category: "trending",
-    period: "day",
-    lang: "javascript",
-    offset: 0,
-    limit: 30,
-  });
+Index.getInitialProps = async ({ reduxStore }) => {
+  await reduxStore.dispatch(getGoldList);
+  await reduxStore.dispatch(getGitList);
 
-  return {
-    listGold: resGold.data.data,
-    listGit: resGit.data.data,
-  };
+  return reduxStore.getState();
 }
 
-export default Index;
+export default connect()(Index);

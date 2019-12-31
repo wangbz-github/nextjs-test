@@ -1,22 +1,32 @@
 import { Select, Layout, List, Icon } from 'antd';
+import { getGitList, changeType } from '../store/github';
+import { useSelector, useDispatch } from 'react-redux';
 const { Option } = Select;
 const { Content } = Layout;
 
-function GithubContent(props) {
+function GithubContent() {
+  const { list, type, category } = useSelector(state => state.github);
+  const dispatch = useDispatch();
+
+  const handleChangeType = (type) => {
+    dispatch(changeType(type));
+    dispatch(getGitList);
+  }
+
   return (
     <Content className="github-content">
       <div className="sub-header">
-        <img class="icon source-icon" _v-7022f083="" src="https://e-gold-cdn.xitu.io/static/github.png?9140c37" />
+        <img className="icon source-icon" _v-7022f083="" src="https://e-gold-cdn.xitu.io/static/github.png?9140c37" />
         <span className="sub-logo-text">Github</span>
-        <Select defaultValue="javascript" onChange={() => { }}>
-          <Option value="javascript">Javascript</Option>
-          <Option value="css">Css</Option>
-          <Option value="html">HTML</Option>
+        <Select defaultValue={type} onChange={handleChangeType}>
+          {category && category.map(item => (
+            <Option value={item.value} key={item.value}>{item.text}</Option>
+          ))}
         </Select>
       </div>
       <List
         grid={{ gutter: 10, column: 2 }}
-        dataSource={props.list}
+        dataSource={list}
         renderItem={item => (
           <List.Item>
             <div className="git-card">
