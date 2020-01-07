@@ -69,7 +69,8 @@ class MyApp extends App {
 export default withReduxStore(MyApp);
 ```
 #### 3.2 store
-通过判断是否有window对象来区分SSR和CSR：如果是SSR则直接创建store；如果是SCR，判断是否已存在store，不存在就创建store，已存在则直接返回。然后使用高阶函数withReduxStore将store自动注入到Provider中
+通过判断是否有window对象来区分SSR和CSR：如果是SSR则直接创建store；如果是SCR，判断是否已存在store，不存在就创建store，已存在则直接返回。然后使用高阶函数withReduxStore将store自动注入到Provider中。
+
 创建store：
 ```javascript
 /* ./store/store.js */
@@ -153,9 +154,11 @@ Index.getInitialProps = async ({ reduxStore }) => {
 ```
 #### 3.5 distapch
 在客户端使用redux-react的useDispatch方法修改store，详见./components/GoldContent.js。
+
 `注：正常来说通过connect注入到props中的dispatch也是可以修改store的，但是测试中并不好用，后面有时间再解决`
 
-###4 代理设置
+
+### 4 代理设置
 nextjs作为node中间层，并不会真正的提供api接口，客户端请求接口需要发到另外的服务器上。为了解决这个问题，需要再node层做一个代理，避免跨域。
 
 1.在项目根目录下新建 [server.js](https://nextjs.org/docs/advanced-features/custom-server) 文件，写入以下代码
@@ -248,4 +251,5 @@ export const initializeStore = (preloadedState = initialState, isServer) => {
 
 ----------
 最后，有关SSR实现原理见[react-ssr-text](https://github.com/wangbz-github/react-ssr-test)
+
 Demo来源-->[掘金酱](https://e.xitu.io/)（使用chrome无痕模式打开）
